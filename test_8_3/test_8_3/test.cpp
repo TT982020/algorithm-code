@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include "SeqList.h"
 
+//再简单的操作，也要调用函数进行，因为函数里面会进行一些检测
 int main() {
 	SL s;
 	SLInit(&s);
@@ -17,6 +18,14 @@ int main() {
 	SLPrint(&s);
 
 	SLPopBack(&s);
+	SLPrint(&s);
+
+	int pos = SLFind(&s, 6);
+	if (pos != -1)
+	{
+		SLInsert(&s, pos, 100);
+	}
+	
 	SLPrint(&s);
 	SLDestroy(&s);
 
