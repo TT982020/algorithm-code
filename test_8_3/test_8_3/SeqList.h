@@ -16,6 +16,13 @@ typedef struct SeqList {
 	int capacity;
 }SL;
 
+typedef int SLTDataType;
+typedef struct SListNode {
+	SLTDataType data;
+	struct SListNode* next;
+}SLTNode;
+void PrintList(SLTNode* phead);
+
 void SLInit(SL* ps);
 void SLDestroy(SL* ps);
 

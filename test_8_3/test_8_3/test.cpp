@@ -29,5 +29,19 @@ int main() {
 	SLPrint(&s);
 	SLDestroy(&s);
 
+	SLTNode* node1 = (SLTNode*)malloc(sizeof(SLTNode));
+	node1->data = 10;
+
+	SLTNode* node2 = (SLTNode*)malloc(sizeof(SLTNode));
+	node2->data = 20;
+
+	SLTNode* node3 = (SLTNode*)malloc(sizeof(SLTNode));
+	node3->data = 30;
+
+	node1->next = node2;
+	node2->next = node3;
+	node3->next = NULL;
+
+	PrintList(node1);
 
 }

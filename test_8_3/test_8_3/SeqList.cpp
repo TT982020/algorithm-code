@@ -126,3 +126,13 @@ void SLModify(SL* ps, int pos, SLDataType data) {
 	assert(pos >= 0 && pos < ps->size);
 	ps->list[pos] = data;
 }
+
+void PrintList(SLTNode* phead) {
+	SLTNode* cur = phead;
+	while (cur != NULL)
+	{
+		printf("%d->", cur->data);
+		cur = cur->next;
+	}
+	printf("NULL\n");
+}
