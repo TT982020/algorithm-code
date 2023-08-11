@@ -23,7 +23,7 @@ void SLTPopBack(SLTNode** pphead);
 
 void SLTPopFront(SLTNode** pphead);
 
-SLTNode* SLTFint(SLTNode* pphead, SLTDataType x);
+SLTNode* SLTFind(SLTNode* phead, SLTDataType x);
 
 //在pos之前插入
 void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x);
@@ -36,4 +36,4 @@ void SLTInsertAfter(SLTNode* pos, SLTDataType x);
 void SLTErase(SLTNode** pphead, SLTNode* pos);
 
 //删除pos之后的
-void SLTErase(SLTNode* pos);
+void SLTEraseAfter(SLTNode* pos);

@@ -86,3 +86,54 @@ void SLTPopFront(SLTNode** pphead) {
 	free(*pphead);
 	*pphead = newhead;
 }
+
+
+SLTNode* SLTFind(SLTNode* phead, SLTDataType x) {
+	SLTNode* cur = phead;
+	while (cur)
+	{
+		if (cur->data == x)
+		{
+			return cur;
+		}
+		cur = cur->next;
+	}
+	return NULL;
+}
+
+//在pos之前插入
+void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x) {
+	assert(pos);
+	if (*pphead == pos)
+	{
+		SLTPushFront(pphead, x);
+	}
+	else
+	{
+		SLTNode* cur = *pphead;
+		while (cur->next != pos)
+		{
+			cur = cur->next;
+		}
+		SLTNode* newnode = BuyListNode(x);
+		newnode->next = pos;
+		cur->next = newnode;
+	}
+
+}
+
+//在pos之后插入
+void SLTInsertAfter(SLTNode* pos, SLTDataType x) {
+
+}
+
+
+//删除pos位置
+void SLTErase(SLTNode** pphead, SLTNode* pos) {
+
+}
+
+//删除pos之后的
+void SLTEraseAfter(SLTNode* pos) {
+
+}
