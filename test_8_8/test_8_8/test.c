@@ -29,8 +29,40 @@ void TestSList2() {
 	SLTPushBack(&plist, 5);
 
 	SLTPrint(plist);
+
+	SLTPushFront(&plist, 10);
+	SLTPushFront(&plist, 20);
+	SLTPushFront(&plist, 30);
+	SLTPushFront(&plist, 40);
+	SLTPushFront(&plist, 50);
+
+	SLTPrint(plist);
+
+	SLTPopBack(&plist);
+	SLTPopBack(&plist);
+	SLTPopBack(&plist);
+
+	SLTPrint(plist);
+}
+
+void TestSList3() {
+	SLTNode* plist = NULL;
+	SLTPushBack(&plist, 1);
+	SLTPushBack(&plist, 2);
+	SLTPushBack(&plist, 3);
+	SLTPushBack(&plist, 4);
+	SLTPushBack(&plist, 5);
+
+	SLTPrint(plist);
+
+	SLTPopFront(&plist);
+	SLTPopFront(&plist);
+	SLTPopFront(&plist);
+	SLTPopFront(&plist);
+
+	SLTPrint(plist);
 }
 int main() {
 	//TestSList1();
-	TestSList2();
+	TestSList3();
 }

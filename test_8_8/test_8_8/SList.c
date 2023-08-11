@@ -23,11 +23,12 @@ SLTNode* BuyListNode(SLTDataType x) {
 }
 
 
-void SLTPushBack(SLTNode** phead, SLTDataType x) {
+void SLTPushBack(SLTNode** pphead, SLTDataType x) {
 	SLTNode* newnode =  BuyListNode(x);
-	if (*phead == NULL)
+	if (*pphead == NULL)
 	{
-		*phead = newnode;
+		//改变结构体指针，需要使用二级指针
+		*pphead = newnode;
 	}
 
 	//以下形式不行，因为phead是形参，要修改 SLTNode* 类型，需要传入 SLTNode**
@@ -37,12 +38,51 @@ void SLTPushBack(SLTNode** phead, SLTDataType x) {
 	}*/
 
 	else {
-		SLTNode* tail = *phead;
+		SLTNode* tail = *pphead;
 		while (tail->next)
 		{
 			tail = tail->next;
 		}
+		//改变结构体，需要用结构体指针
 		tail->next = newnode;
 	}
 }
 
+
+void SLTPushFront(SLTNode** pphead, SLTDataType x) {
+	SLTNode* newnode =  BuyListNode(x);
+	newnode->next = *pphead;
+	*pphead = newnode;
+}
+
+void SLTPopBack(SLTNode** pphead) {
+	assert(*pphead);
+
+	if ((*pphead)->next == NULL)
+	{
+		free(*pphead);
+		*pphead = NULL;
+	}
+	else
+	{
+		SLTNode* curPrev = NULL;
+		SLTNode* cur = *pphead;
+		while (cur->next)
+		{
+			curPrev = cur;
+			cur = cur->next;
+		}
+		free(cur);
+		curPrev->next = NULL;
+	}
+}
+
+void SLTPopFront(SLTNode** pphead) {
+	//空
+	assert(*pphead);
+
+	//非空
+	SLTNode* newhead = (*pphead)->next;
+	free(*pphead);
+	*pphead = newhead;
+}
