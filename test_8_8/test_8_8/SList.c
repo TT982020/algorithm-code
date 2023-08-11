@@ -124,16 +124,37 @@ void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x) {
 
 //在pos之后插入
 void SLTInsertAfter(SLTNode* pos, SLTDataType x) {
-
+	assert(pos);
+	SLTNode* newnode = BuyListNode(x);
+	newnode->next = pos->next;
+	pos->next = newnode;
 }
 
 
 //删除pos位置
 void SLTErase(SLTNode** pphead, SLTNode* pos) {
-
+	assert(pos);
+	if (pos == *pphead)
+	{
+		SLTPopFront(pphead);
+	}
+	else
+	{
+		SLTNode* cur = *pphead;
+		while (cur->next != pos)
+		{
+			cur = cur->next;
+		}
+		cur->next = pos->next;
+		free(pos);
+	}
 }
 
 //删除pos之后的
 void SLTEraseAfter(SLTNode* pos) {
-
+	assert(pos);
+	assert(pos->next);
+	SLTNode* tmp = pos->next;
+	pos->next = tmp->next;
+	free(tmp);
 }

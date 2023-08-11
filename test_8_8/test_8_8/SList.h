@@ -31,7 +31,6 @@ void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x);
 //在pos之后插入
 void SLTInsertAfter(SLTNode* pos, SLTDataType x);
 
-
 //删除pos位置
 void SLTErase(SLTNode** pphead, SLTNode* pos);
 
