@@ -24,6 +24,8 @@ SLTNode* BuyListNode(SLTDataType x) {
 
 
 void SLTPushBack(SLTNode** pphead, SLTDataType x) {
+	assert(pphead);
+
 	SLTNode* newnode =  BuyListNode(x);
 	if (*pphead == NULL)
 	{
@@ -50,12 +52,16 @@ void SLTPushBack(SLTNode** pphead, SLTDataType x) {
 
 
 void SLTPushFront(SLTNode** pphead, SLTDataType x) {
+	assert(pphead);
+
 	SLTNode* newnode =  BuyListNode(x);
 	newnode->next = *pphead;
 	*pphead = newnode;
 }
 
 void SLTPopBack(SLTNode** pphead) {
+	assert(pphead);
+
 	assert(*pphead);
 
 	if ((*pphead)->next == NULL)
@@ -78,6 +84,8 @@ void SLTPopBack(SLTNode** pphead) {
 }
 
 void SLTPopFront(SLTNode** pphead) {
+	assert(pphead);
+
 	//空
 	assert(*pphead);
 
@@ -103,6 +111,8 @@ SLTNode* SLTFind(SLTNode* phead, SLTDataType x) {
 
 //在pos之前插入
 void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x) {
+	assert(pphead);
+
 	assert(pos);
 	if (*pphead == pos)
 	{
@@ -124,6 +134,7 @@ void SLTInsert(SLTNode** pphead, SLTNode* pos, SLTDataType x) {
 
 //在pos之后插入
 void SLTInsertAfter(SLTNode* pos, SLTDataType x) {
+
 	assert(pos);
 	SLTNode* newnode = BuyListNode(x);
 	newnode->next = pos->next;
@@ -133,6 +144,8 @@ void SLTInsertAfter(SLTNode* pos, SLTDataType x) {
 
 //删除pos位置
 void SLTErase(SLTNode** pphead, SLTNode* pos) {
+	assert(pphead);
+
 	assert(pos);
 	if (pos == *pphead)
 	{
