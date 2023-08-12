@@ -38,3 +38,5 @@ void SLTErase(SLTNode** pphead, SLTNode* pos);
 
 //É¾³ýposÖ®ºóµÄ
 void SLTEraseAfter(SLTNode* pos);
+
+void SLTDestroy(SLTNode** pphead);

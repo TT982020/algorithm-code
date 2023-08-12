@@ -171,3 +171,15 @@ void SLTEraseAfter(SLTNode* pos) {
 	pos->next = tmp->next;
 	free(tmp);
 }
+
+void SLTDestroy(SLTNode** pphead) {
+	assert(pphead);
+	SLTNode* cur = *pphead;
+	while (cur)
+	{
+		SLTNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+	*pphead = NULL;
+}

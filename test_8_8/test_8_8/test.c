@@ -115,9 +115,25 @@ void TestSList6() {
 
 	SLTPrint(plist);
 }
+
+void TestSList7() {
+	SLTNode* plist = NULL;
+	SLTPushBack(&plist, 1);
+	SLTPushBack(&plist, 2);
+	SLTPushBack(&plist, 3);
+	SLTPushBack(&plist, 4);
+	SLTPushBack(&plist, 5);
+
+	SLTPrint(plist);
+
+	SLTDestroy(&plist);
+}
+
 int main() {
 	//TestSList1();
 	//TestSList3();
 	//TestSList4();
-	TestSList6();
+	//TestSList6();
+
+	TestSList7();
 }
