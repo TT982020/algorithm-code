@@ -88,7 +88,7 @@ void LTPopFront(LTNode* phead) {
 	//LTErase(phead->next);
 }
 
-void LTSize(LTNode* phead) {
+int LTSize(LTNode* phead) {
 	assert(phead);
 	int size = 0;
 	LTNode* cur = phead->next;
@@ -134,4 +134,17 @@ void LTErase(LTNode* pos) {
 	pos->next->prev = posPrev;
 
 	free(pos);
+}
+
+void LTDestroy(LTNode* phead) {
+	assert(phead);
+
+	LTNode* cur = phead->next;
+	while (cur != phead)
+	{
+		LTNode* next = cur->next;
+		free(cur);
+		cur = next;
+	}
+	free(phead);
 }

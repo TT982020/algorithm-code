@@ -77,6 +77,9 @@ void TestList03() {
 	LTPushFront(phead, 40);
 	LTPushFront(phead, 50);
 	LTPrint(phead);
+
+	LTDestroy(phead);
+	phead = NULL;
 }
 
 int main() {
