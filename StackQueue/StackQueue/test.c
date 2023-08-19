@@ -37,4 +37,6 @@ void testQueue() {
 int main() {
 	//testStack();
 	testQueue();
+	//Mystack* tmp = (Mystack*)malloc(sizeof(Mystack));
+	//printf("1");
 }
