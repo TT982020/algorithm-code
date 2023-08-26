@@ -143,6 +143,17 @@ void PreOrder(BTNode* root) {
 	PreOrder(root->right);
 }
 
+void InOrder(BTNode* root) {
+	if (root == NULL)
+	{
+		printf("N ");
+		return;
+	}
+	
+	InOrder(root->left);
+	printf("%d ", root->data);
+	InOrder(root->right);
+}
 
 //int main() {
 //	//createData();
@@ -153,4 +164,6 @@ void PreOrder(BTNode* root) {
 int main() {
 	BTNode* root =  CreatBinaryTree();
 	PreOrder(root);
+	printf("\n");
+	InOrder(root);
 }
