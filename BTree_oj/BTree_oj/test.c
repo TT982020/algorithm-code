@@ -3,11 +3,13 @@
 #include <stdlib.h>
 #include <assert.h>
 #include <stdbool.h>
-struct TreeNode {
+#include "Queue.h"
+typedef struct TreeNode {
     int val;
     struct TreeNode* left;
-    struct TreeNode* right;    
-};
+    struct TreeNode* right;
+}TreeNode;
+
 //相同的树
 bool isSameTree(struct TreeNode* p, struct TreeNode* q) {
     if (p == NULL && q == NULL) return true;
@@ -62,6 +64,59 @@ int* preorderTraversal(struct TreeNode* root, int* returnSize) {
 //二叉树的中序遍历
 
 //二叉树的后序遍历
-int main() {
 
+//层序遍历
+void LevelOrder(struct TreeNode* root) {
+    Que q;
+    QueueInit(&q);
+    QueuePush(&q, root);
+    while (!QueueEmpty(&q))
+    {
+        TreeNode* tmp = QueueFront(&q);
+        printf("%d ", tmp->val);
+        QueuePop(&q);
+        if (tmp->left)
+        {
+            QueuePush(&q, tmp->left);
+        }
+        if (tmp->right)
+        {
+            QueuePush(&q, tmp->right);
+        }
+    }
+    QueueDestroy(&q);
+}
+
+TreeNode* BuyNode(int data) {
+    TreeNode* tmp = (TreeNode*)malloc(sizeof(TreeNode));
+    if (tmp == NULL)
+    {
+        perror("malloc failed");
+        return NULL;
+    }
+    tmp->val = data;
+    tmp->left = NULL;
+    tmp->right = NULL;
+    return tmp;
+}
+
+TreeNode* CreatBinaryTree()
+{
+    TreeNode* node1 = BuyNode(1);
+    TreeNode* node2 = BuyNode(2);
+    TreeNode* node3 = BuyNode(3);
+    TreeNode* node4 = BuyNode(4);
+    TreeNode* node5 = BuyNode(5);
+    TreeNode* node6 = BuyNode(6);
+
+    node1->left = node2;
+    node1->right = node4;
+    node2->left = node3;
+    node4->left = node5;
+    node4->right = node6;
+    return node1;
+}
+int main() {
+    TreeNode* root = CreatBinaryTree();
+    LevelOrder(root);
 }
