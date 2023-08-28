@@ -87,6 +87,18 @@ void LevelOrder(struct TreeNode* root) {
     QueueDestroy(&q);
 }
 
+//二叉树的销毁
+void BTDestroy(TreeNode* root) {
+    if (root == NULL)
+    {
+        return;
+    }
+    BTDestroy(root->left);
+    BTDestroy(root->right);
+    free(root);
+}
+
+
 TreeNode* BuyNode(int data) {
     TreeNode* tmp = (TreeNode*)malloc(sizeof(TreeNode));
     if (tmp == NULL)
@@ -99,6 +111,40 @@ TreeNode* BuyNode(int data) {
     tmp->right = NULL;
     return tmp;
 }
+//判断一棵树是不是完全二叉树
+//判断准则：层序遍历，节点为NULL也入队列，当出队列碰到NULL时，如果后序的均为NULL 则为
+//完全二叉树，否则不是完全二叉树
+bool BTComplete(TreeNode* root) {
+    Que q;
+    QueueInit(&q);
+    if (root)
+    {
+        QueuePush(&q, root);
+    }
+    while (!QueueEmpty(&q))
+    {
+        TreeNode* front = QueueFront(&q);
+        QueuePop(&q);
+        if (front == NULL)
+        {
+            break;
+        }
+        QueuePush(&q, front->left);
+        QueuePush(&q, front->right);
+    }
+    while (!QueueEmpty(&q))
+    {
+        TreeNode* front = QueueFront(&q);
+        QueuePop(&q);
+        if (front != NULL)
+        {
+            QueueDestroy(&q);
+            return false;
+        }
+    }
+    QueueDestroy(&q);
+    return true;
+}
 
 TreeNode* CreatBinaryTree()
 {
@@ -108,15 +154,24 @@ TreeNode* CreatBinaryTree()
     TreeNode* node4 = BuyNode(4);
     TreeNode* node5 = BuyNode(5);
     TreeNode* node6 = BuyNode(6);
+    TreeNode* node7 = BuyNode(7);
 
     node1->left = node2;
     node1->right = node4;
     node2->left = node3;
     node4->left = node5;
     node4->right = node6;
+    node2->right = node7;
     return node1;
 }
 int main() {
     TreeNode* root = CreatBinaryTree();
     LevelOrder(root);
+    printf("\n");
+
+    bool ret = BTComplete(root);
+    printf("%d", ret);
+
+    BTDestroy(root);
+    root = NULL;
 }
