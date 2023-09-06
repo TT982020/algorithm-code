@@ -115,3 +115,37 @@ void BubbleSort(int* a, int n) {
 		if (!flag) break;
 	}
 }
+
+void Swap(int* p1, int* p2) {
+	int tmp = *p1;
+	*p1 = *p2;
+	*p2 = tmp;
+}
+
+void SelectSort(int* a, int n) {
+	int begin = 0, end = n - 1;
+	while (begin < end)
+	{
+		int mini = begin, maxi = begin;
+		for (int i = begin; i <= end; i++) {
+			
+			if (a[i] < a[mini])
+			{
+				mini = i;
+			}
+			if (a[i] >= a[maxi])
+			{
+				maxi = i;
+			}
+		}
+		Swap(&a[begin], &a[mini]);
+		if (begin == maxi)
+		{
+			maxi = mini;
+		}
+		
+		Swap(&a[end], &a[maxi]);
+		begin++;
+		end--;
+	}
+}

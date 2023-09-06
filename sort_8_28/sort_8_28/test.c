@@ -8,6 +8,14 @@ void TestInsertSort() {
 	PrintArray(a, n);
 
 }
+
+void TestSelectSort() {
+	int a[] = { 4,7,1,9,3,6,5,8,3,2,0 };
+	int n = sizeof(a) / sizeof(int);
+	SelectSort(a, n);
+	PrintArray(a, n);
+
+}
 void TestOP()
 {
 	srand(time(0));
@@ -38,9 +46,14 @@ void TestOP()
 	BubbleSort(a3, N);
 	int end3 = clock();
 
+	int begin4 = clock();
+	SelectSort(a4, N);
+	int end4 = clock();
+
 	printf("InsertSort:%d\n", end1 - begin1);
 	printf("ShellSort:%d\n", end2 - begin2);
 	printf("BubbleSort:%d\n", end3 - begin3);
+	printf("SelectSort:%d\n", end4 - begin4);
 	free(a1);
 	free(a2);
 	free(a3);
@@ -58,4 +71,5 @@ int main() {
 	//TestInsertSort();
 	//TestShellSort();
 	TestOP();
+	//TestSelectSort();
 }
