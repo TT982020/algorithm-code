@@ -149,3 +149,110 @@ void SelectSort(int* a, int n) {
 		end--;
 	}
 }
+void AdjustDown(int* a, int n, int parent) {
+	int child = parent * 2 + 1;
+	//升序建大堆
+	while (child < n)
+	{
+		if (child + 1 < n && a[child + 1] > a[child])
+		{
+			child++;
+		}
+		if (a[child] > a[parent])
+		{
+			Swap(&a[child], &a[parent]);
+			parent = child;
+			child = parent * 2 + 1;
+		}
+		else
+		{
+			break;
+		}
+	}
+}
+
+void HeapSort(int* a, int n) {
+	for (int i = (n - 1 - 1) / 2; i >= 0; i--)
+	{
+		//建大堆
+		AdjustDown(a, n, i);
+	}
+
+	int end = n - 1;
+	
+	while (end > 0)
+	{
+		Swap(&a[0], &a[end]);
+		AdjustDown(a, end, 0);
+		end--;
+	}
+
+}
+
+int PartSort(int* a, int left, int right) {
+	int keyi = left;
+
+	while (left < right)
+	{
+		while (left < right && a[right] >= a[keyi])
+		{
+			right--;
+		}
+		while (left < right && a[left] <= a[keyi])
+		{
+			left++;
+		}
+		Swap(&a[left], &a[right]);
+	}
+	Swap(&a[left], &a[keyi]);
+	return left;
+}
+
+int PartSort2(int* a, int left, int right) {
+	int key = a[left];
+	int hole = left;
+
+	while (left < right)
+	{
+		while (left < right && a[right] >= key)
+		{
+			right--;
+		}
+		a[hole] = a[right];
+		hole = right;
+		while (left < right && a[left] <= key)
+		{
+			left++;
+		}
+		a[hole] = a[left];
+		hole = left;
+	}
+	a[hole] = key;
+	return hole;
+}
+
+int PartSort3(int* a, int left, int right) {
+	int keyi = left;
+	int prev = left, cur = left + 1;
+	while (cur <= right)
+	{
+		if (a[cur] < a[keyi]) {
+			prev++;
+			Swap(&a[prev], &a[cur]);
+		}
+		cur++;
+	}
+	Swap(&a[prev], &a[keyi]);
+	keyi = prev;
+	return keyi;
+}
+
+void QuickSort(int* a, int begin, int end) {
+	if (begin >= end)
+	{
+		return;
+	}
+	int partition = PartSort3(a, begin, end);
+	QuickSort(a, begin, partition - 1);
+	QuickSort(a, partition + 1, end);
+}
