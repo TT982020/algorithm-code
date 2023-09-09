@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include "sort.h"
 #include <stdbool.h>
+
 void PrintArray(int* a, int n) {
 	for (int i = 0; i < n; i++)
 	{
@@ -189,7 +190,44 @@ void HeapSort(int* a, int n) {
 
 }
 
+int getMid(int* a, int left, int right) {
+	int mid = (left + right) / 2;
+	if (a[left] < a[mid])
+	{
+		if (a[mid] < a[right]) {
+			return mid;
+		}
+		else {
+			if (a[left] < a[right]) {
+				return right;
+			}
+			else
+			{
+				return left;
+			}
+		}
+	}
+	else
+	{
+		if (a[right]<a[mid])
+		{
+			return mid;
+		}
+		else {
+			if (a[right]<a[left])
+			{
+				return right;
+			}
+			else {
+				return left;
+			}
+		}
+	}
+}
+
 int PartSort(int* a, int left, int right) {
+	int midi = getMid(a, left, right);
+	Swap(&a[midi], &a[left]);
 	int keyi = left;
 
 	while (left < right)
@@ -209,6 +247,8 @@ int PartSort(int* a, int left, int right) {
 }
 
 int PartSort2(int* a, int left, int right) {
+	int midi = getMid(a, left, right);
+	Swap(&a[midi], &a[left]);
 	int key = a[left];
 	int hole = left;
 
@@ -232,6 +272,9 @@ int PartSort2(int* a, int left, int right) {
 }
 
 int PartSort3(int* a, int left, int right) {
+	int midi = getMid(a, left, right);
+	Swap(&a[midi], &a[left]);
+
 	int keyi = left;
 	int prev = left, cur = left + 1;
 	while (cur <= right)
@@ -247,6 +290,33 @@ int PartSort3(int* a, int left, int right) {
 	return keyi;
 }
 
+void QuickSortNonR(int* a, int begin, int end) {
+	ST st;
+	STInit(&st);
+	STPush(&st, begin);
+	STPush(&st, end);
+	while (!STEmpty(&st)) {
+		int right = STTop(&st);
+		STPop(&st);
+		int left = STTop(&st);
+		STPop(&st);
+		int partition = PartSort3(a, left, right);
+		if (partition + 1 < right)
+		{
+			STPush(&st, partition + 1);
+			STPush(&st, right);
+		}
+		
+		if (left < partition - 1)
+		{
+			STPush(&st, left);
+			STPush(&st, partition - 1);
+		}
+
+	}
+	
+}
+
 void QuickSort(int* a, int begin, int end) {
 	if (begin >= end)
 	{
@@ -255,4 +325,41 @@ void QuickSort(int* a, int begin, int end) {
 	int partition = PartSort3(a, begin, end);
 	QuickSort(a, begin, partition - 1);
 	QuickSort(a, partition + 1, end);
+}
+
+void _MergeSort(int* a, int begin, int end, int* tmp) {
+	if (begin == end)
+	{
+		return;
+	}
+	int mid = (begin + end) / 2;
+	_MergeSort(a, begin, mid, tmp);
+	_MergeSort(a, mid + 1, end, tmp);
+	int begin1 = begin, end1 = mid;
+	int begin2 = mid + 1, end2 = end;
+	int k = begin1;
+	while (begin1 <= end1 && begin2 <= end2)
+	{
+		if (a[begin1] < a[begin2]) {
+			tmp[k++] = a[begin1++];
+		}
+		else {
+			tmp[k++] = a[begin2++];
+		}
+	}
+	while (begin1 <= end1)
+	{
+		tmp[k++] = a[begin1++];
+	}
+	while (begin2 <= end2)
+	{
+		tmp[k++] = a[begin2++];
+	}
+	memcpy(a + begin, tmp + begin,  sizeof(int) * (end - begin + 1));
+}
+
+void MergeSort(int* a, int n) {
+	int* tmp = (int*)malloc(sizeof(int) * n);
+	_MergeSort(a, 0, n - 1, tmp);
+	return;
 }
