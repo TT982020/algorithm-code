@@ -45,6 +45,14 @@ void TestMergeSort() {
 	PrintArray(a, n);
 }
 
+void TestMergeSortNonR() {
+	int a[] = { 4,7,1,9,3,6,5,8,3,2,0 };
+	int n = sizeof(a) / sizeof(int);
+	//MergeSortNonR2(a, n);
+	MergeSortNonR(a, n);
+	PrintArray(a, n);
+}
+
 void TestOP()
 {
 	srand(time(0));
@@ -124,4 +132,5 @@ int main() {
 	//TestHeapSort();
 	//TestQuickSort();
 	//TestMergeSort();
+	//TestMergeSortNonR();
 }
