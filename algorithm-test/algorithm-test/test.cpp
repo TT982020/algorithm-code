@@ -58,7 +58,7 @@ void duplicateZeros(vector<int>& arr) {
 		i++;
 	}
 	i--;*/
-	int i = 0, j = 0;
+	int i = 0, j = -1;
 	while (i < arr.size())
 	{
 		if (arr[i] != 0) {
